@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_playground/examples/animations/one.dart';
+import 'package:flutter_playground/examples/animations/three.dart';
 import 'package:flutter_playground/examples/animations/two.dart';
 import 'package:flutter_playground/examples/no_example.dart';
 
@@ -31,6 +32,11 @@ class _SimpleWidgetState extends State<SimpleWidget> {
       case 2:
         {
           selectedPage = ExampleTwo();
+        }
+        break;
+      case 3:
+        {
+          selectedPage = ExampleThree();
         }
         break;
       default:{
