@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/examples/animations/five.dart';
+import 'package:flutter_playground/examples/animations/four.dart';
 import 'package:flutter_playground/examples/animations/one.dart';
 import 'package:flutter_playground/examples/animations/three.dart';
 import 'package:flutter_playground/examples/animations/two.dart';
@@ -8,6 +10,16 @@ void main() => runApp(MaterialApp(home: DemoApp()));
 
 class DemoApp extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(body: SimpleWidget());
+}
+
+class ExampleIllustrations {
+  String title;
+  String message;
+
+  ExampleIllustrations({
+    required this.title,
+    required this.message,
+  });
 }
 
 class SimpleWidget extends StatefulWidget {
@@ -39,9 +51,18 @@ class _SimpleWidgetState extends State<SimpleWidget> {
           selectedPage = ExampleThree();
         }
         break;
-      default:{
-
-      }
+      case 4:
+        {
+          selectedPage = ExampleFour();
+        }
+        break;
+      case 5:
+        {
+          selectedPage = ExampleFive();
+        }
+        break;
+      default:
+        {}
     }
     Navigator.push(
       context,
@@ -56,7 +77,7 @@ class _SimpleWidgetState extends State<SimpleWidget> {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              goToExample(index+1);
+              goToExample(index + 1);
             },
             child: Container(
               margin: const EdgeInsets.all(4),
