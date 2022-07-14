@@ -35,12 +35,15 @@ class _ExampleFiveState extends State<ExampleFive> {
   Widget _buildFixedList(Color color, String _text) {
     return Container(
       color: color,
-      child: Center(
-        child: Text(
-          _text,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 25,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Center(
+          child: Text(
+            _text,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+            ),
           ),
         ),
       ),
@@ -73,87 +76,52 @@ class _ExampleFiveState extends State<ExampleFive> {
             backgroundColor: Color(0xFFEDF2F8),
             pinned: true,
           ),
-          SliverFixedExtentList(
-            itemExtent: 70,
+          SliverList(
             delegate: SliverChildListDelegate([
               _buildFixedList(Colors.cyan, "Cyan"),
-              _buildFixedList(Colors.green, "Green"),
-              _buildFixedList(Colors.orange, "Orange"),
-              _buildFixedList(Colors.amberAccent, "AmberAccent"),
-              _buildFixedList(Colors.cyan, "Cyan"),
-              _buildFixedList(Colors.green, "Green"),
-              _buildFixedList(Colors.orange, "Orange"),
-              _buildFixedList(Colors.amberAccent, "AmberAccent"),
-              _buildFixedList(Colors.blueGrey, "Blue Grey"),
+              // _buildFixedList(Colors.green, "Green"),
+              // _buildFixedList(Colors.orange, "Orange"),
+              // _buildFixedList(Colors.amberAccent, "AmberAccent"),
+              // _buildFixedList(Colors.cyan, "Cyan"),
+              // _buildFixedList(Colors.green, "Green"),
+              // _buildFixedList(Colors.orange, "Orange"),
+              // _buildFixedList(Colors.amberAccent, "AmberAccent"),
+              // _buildFixedList(Colors.blueGrey, "Blue Grey"),
             ]),
           ),
           SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Container(
-                  margin: const EdgeInsets.all(24),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          'Add Name',
-                          style: TextStyle(
-                            fontSize: 22,
-                          ),
-                        ),
-                        _buildName(),
-                        const SizedBox(height: 16),
-                        RaisedButton(
-                          child: const Text('Submit'),
-                          onPressed: _submit,
-                        ),
-                      ],
-                    ),
+            delegate: SliverChildBuilderDelegate(
+              (dContext, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 4,
+                    horizontal: 15,
                   ),
-                )
-              ],
+                  child: Text('index: $index'),
+                );
+              },
+              childCount: 5,
             ),
           ),
-          SliverGrid(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 1.5,
-            ),
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-              return Container(
-                padding: EdgeInsets.all(8),
-                color: _randomColor(index),
-                child: Center(
-                  child: Text(
-                    _name[index],
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              children: <Widget>[
+                Expanded(child: Container()),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Enter name',
                     ),
                   ),
                 ),
-              );
-            }, childCount: _name.length),
-          )
+                _buildFixedList(Colors.green, 'Hello sliver'),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
-}
-
-Color _randomColor(int index) {
-  if (index % 4 == 0) {
-    return Colors.blue;
-  } else if (index % 4 == 1) {
-    return Colors.orange;
-  } else if (index % 4 == 2) {
-    return Colors.cyan;
-  }
-  return Colors.red;
 }
