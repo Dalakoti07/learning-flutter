@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/examples/my_event_bus.dart';
 
 class StateFullSubWidget extends StatefulWidget {
   int index;
@@ -10,12 +11,20 @@ class StateFullSubWidget extends StatefulWidget {
 }
 
 class _StateFullSubWidgetState extends State<StateFullSubWidget> {
+
+  var clickedButton = <int>[];
+
   @override
   void initState() {
     super.initState();
     debugPrint(
       'init called for ${widget.index} ... ',
     );
+    myEventBus.on<int>().listen((event) {
+      setState((){
+        clickedButton.add(event);
+      });
+    });
   }
 
   @override
@@ -23,9 +32,14 @@ class _StateFullSubWidgetState extends State<StateFullSubWidget> {
     return Container(
       margin: EdgeInsets.all(8),
       color: Colors.blue,
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: Text('Index is: ${widget.index}'),
+      child: InkWell(
+        onTap: (){
+          myEventBus.fire(widget.index);
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Text('Index is: ${widget.index} ck: $clickedButton'),
+        ),
       ),
     );
   }
