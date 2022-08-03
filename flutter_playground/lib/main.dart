@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_playground/examples/animations/five.dart';
 import 'package:flutter_playground/examples/animations/four.dart';
 import 'package:flutter_playground/examples/animations/one.dart';
+import 'package:flutter_playground/examples/animations/seven.dart';
+import 'package:flutter_playground/examples/animations/six.dart';
 import 'package:flutter_playground/examples/animations/three.dart';
 import 'package:flutter_playground/examples/animations/two.dart';
 import 'package:flutter_playground/examples/no_example.dart';
@@ -61,8 +63,20 @@ class _SimpleWidgetState extends State<SimpleWidget> {
           selectedPage = ExampleFive();
         }
         break;
+      case 6:
+        {
+          selectedPage = ExampleSix();
+        }
+        break;
+      case 7:
+        {
+          selectedPage = ExampleSeven();
+        }
+        break;
       default:
-        {}
+        {
+          selectedPage = NoExample();
+        }
     }
     Navigator.push(
       context,
